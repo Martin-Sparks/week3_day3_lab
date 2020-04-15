@@ -1,5 +1,6 @@
 require ('pg')
 require_relative('../db/sql_runner')
+require_relative('albums')
 
 class Artist
 
@@ -22,9 +23,9 @@ class Artist
             @id = result[0]["id"].to_i 
     end
 
-    def albums_by_artist
+    def albums_by_artist()
         sql = "SELECT * FROM albums WHERE id = $1"
-        value = [@id]
+        values = [@id]
         results = SqlRunner.run(sql, values)
         return results.map {|album| Albums.new(album)}
     end
@@ -35,5 +36,9 @@ class Artist
         return artists.map {|artist| Artist.new(artist)}
     end
 
+    def self.delete_all()
+        sql = "DELETE FROM artist"
+        SqlRunner.run(sql)
+    end
 
 end
