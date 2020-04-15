@@ -10,5 +10,17 @@ class Artist
         @artist_name = options['artist_name']
     end
 
+    def save()
+        sql = "INSERT INTO artist
+        (
+            artist name)
+            VALUES
+            ($1)
+            RETURNING id"
+            values = [@artist_name]
+            result = SqlRunner.run(sql, values)
+            @id = result[0]["id"].to_i 
+    end
+
 
 end
