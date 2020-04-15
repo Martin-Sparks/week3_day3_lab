@@ -13,7 +13,7 @@ class Artist
     def save()
         sql = "INSERT INTO artist
         (
-            artist name)
+            artist_name)
             VALUES
             ($1)
             RETURNING id"
